@@ -9,8 +9,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 public enum LocomotionState { Swim, Walk };
 public class LocomotionSystemsManager : MonoBehaviour
 {
+    [Header("Dependencies")]
     [SerializeField] SurfaceChecker surfaceChecker;
-
     [SerializeField] Swim swim;
     [SerializeField] ActionBasedContinuousMoveProvider continousMove;
     [SerializeField] ActionBasedSnapTurnProvider snapTurn;
@@ -26,6 +26,7 @@ public class LocomotionSystemsManager : MonoBehaviour
     }
     private void Start()
     {
+        //set initial state
         _currentState = LocomotionState.Walk;
     }
 

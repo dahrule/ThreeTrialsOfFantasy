@@ -24,15 +24,20 @@ public class JumpTester : MonoBehaviour
 
     [SerializeField] Camera playerCam;
 
+
+    private void Awake()
+    {
+        characterController = GetComponent<CharacterController>();
+        jumpActionReferenc.action.performed += startJump;
+        moveAction.action.performed += startMove;
+    }
+   
+
     // Start is called before the first frame update
     void Start()
     {
         defaultGravity = activeGravity;
-        characterController = GetComponent<CharacterController>();
         originalStepOffset = characterController.stepOffset;
-
-        jumpActionReferenc.action.performed += startJump;
-        moveAction.action.performed += startMove;
         characterController.height = 1;
     }
 

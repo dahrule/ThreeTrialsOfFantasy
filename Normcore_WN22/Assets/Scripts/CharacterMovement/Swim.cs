@@ -14,7 +14,7 @@ public class Swim : MonoBehaviour
     [SerializeField] float swimForce=2f;
     [SerializeField] float dragForce = 1f;
     [SerializeField] float minForce = 1f; //minimum stroke force required to move.
-    [SerializeField] float minTimeBetweenStrokes;
+    [SerializeField] float minTimeBetweenStrokes=0.2f; //minimum time required between strokes to validate movement.
 
     [Header("Swim Input controllers")]
     [SerializeField] InputActionReference rightControllerVelocity;
@@ -36,17 +36,18 @@ public class Swim : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        //Set rigid body's  and collider initial states
         capsuleCollider = GetComponent<CapsuleCollider>();
         rgbody = GetComponent<Rigidbody>();
+
+        //Set rigid body's  and collider's states.
         rgbody.useGravity = false;
+        rgbody.constraints = RigidbodyConstraints.FreezeRotation;
+        AddDrag();
+
         capsuleCollider.enabled = false;
         capsuleCollider.height = 0.5f;
         capsuleCollider.radius = 0.25f;
-        
-        rgbody.constraints = RigidbodyConstraints.FreezeRotation;
-        rgbody.drag = dragForce;
-        
+         
     }
 
     private void OnEnable()
@@ -63,12 +64,19 @@ public class Swim : MonoBehaviour
     void Update()
     {
         //Update collider position 
-        capsuleCollider.center=XRcamera.localPosition;
+        capsuleCollider.center = XRcamera.localPosition;
 
-        //Clamp the vertical position of the swimmer so he cannot move above surface.
+        ClampVerticalMovement();
+    }
+
+    private void ClampVerticalMovement()
+    {
+        //Restricts the vertical movement of the swimmer no further than the water surface.
+        float lowerLimit = -100f;
+        float upperLimit = waterSurface.position.y - (neckReference.position.y - transform.position.y) - 0.1f;
+
         Vector3 clampedPosition = transform.position;
-        //clampedPosition.y= Mathf.Clamp(clampedPosition.y, -100,waterSurface.position.y+neckReference.position.y+neckOffset);
-        clampedPosition.y= Mathf.Clamp(clampedPosition.y, -100, waterSurface.position.y-(neckReference.position.y- transform.position.y)-0.1f);
+        clampedPosition.y = Mathf.Clamp(clampedPosition.y, lowerLimit, upperLimit);
 
         transform.position = clampedPosition;
     }
@@ -105,11 +113,15 @@ public class Swim : MonoBehaviour
         return true;
     }
 
-    /*private void AddDrag()
+    private void AddDrag()
    {
-       *//*if (rgbody.velocity.sqrMagnitude > 0.01f)
-       {
-           rgbody.AddForce(-rgbody.velocity * dragForce, ForceMode.Acceleration);
-       }*//*
-   }*/
+
+        rgbody.drag = dragForce;
+
+        //If drag is set manually, use this in update.
+        /*if (rgbody.velocity.sqrMagnitude > 0.01f)
+        {
+            rgbody.AddForce(-rgbody.velocity * dragForce, ForceMode.Acceleration);
+        }*/
+    }
 }

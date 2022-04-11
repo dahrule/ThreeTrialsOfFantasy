@@ -9,6 +9,15 @@ public class ClimbInteractable : XRBaseInteractable
 
     XRBaseInteractor _interactor;
 
+    protected override void Awake()
+    {
+        base.Awake();
+        if(climber==null)
+        {
+            climber = FindObjectOfType<Climber>();
+        }
+    }
+
     protected override void OnSelectEntered(SelectEnterEventArgs args)
     {
         base.OnSelectEntered(args);

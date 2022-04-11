@@ -392,7 +392,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 107375865}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -7089,7 +7089,7 @@ MonoBehaviour:
   m_RigBaseGameObject: {fileID: 1500267856}
   m_CameraFloorOffsetObject: {fileID: 889204892}
   m_CameraGameObject: {fileID: 1556082873}
-  m_RequestedTrackingOriginMode: 2
+  m_RequestedTrackingOriginMode: 1
   m_CameraYOffset: 1.36144
   m_TrackingSpace: 3
   m_TrackingOriginMode: -2147483648
@@ -7170,10 +7170,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 009ded47c0ed8554db17b5c3c58d8e22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swimForce: 4
+  swimForce: 2
   dragForce: 1
   minForce: 1
-  minTimeBetweenStrokes: 0.5
+  minTimeBetweenStrokes: 0
   rightControllerVelocity: {fileID: -3056783339765901586, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   leftControllerVelocity: {fileID: -7468325728582583635, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   trackingReference: {fileID: 1500267858}
@@ -7206,10 +7206,10 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!114 &1500267865
 MonoBehaviour:
   m_ObjectHideFlags: 0
