@@ -39,6 +39,8 @@ public class JumpTester : MonoBehaviour
         defaultGravity = activeGravity;
         originalStepOffset = characterController.stepOffset;
         characterController.height = 1;
+
+        Debug.Log("Jump tester script start");
     }
 
     private void startMove(InputAction.CallbackContext obj)
@@ -61,7 +63,7 @@ public class JumpTester : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        Debug.Log(hit.gameObject.name);
+        //Debug.Log(hit.gameObject.name);
         if (hit.gameObject.CompareTag("Ground"))
         {
             characterController.stepOffset = originalStepOffset;
