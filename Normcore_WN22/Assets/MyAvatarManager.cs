@@ -16,12 +16,12 @@ public struct AvatarType
 
 public class MyAvatarManager : MonoBehaviour
 {
-    
+    [Header("Dependencies")]
     [SerializeField] GameObject xrRig;
-    [SerializeField] GameObject locomotionProvider;
+    [SerializeField] GameObject locomotionSystemProvider;
     [SerializeField] GameObject neckReference;
 
-    [SerializeField] AvatarType[] avatars;
+    [SerializeField] AvatarType[] avatarTypes;
 
 
     private RealtimeAvatarManager rtAvatarManager;
@@ -41,7 +41,8 @@ public class MyAvatarManager : MonoBehaviour
 
     void OnEnable()
     {
-
+        //subscribe to events
+        //rtAvatarManager.avatarCreated += AvatarCreated;
     }
     #endregion
 
@@ -49,16 +50,16 @@ public class MyAvatarManager : MonoBehaviour
     private void AvatarCreated(RealtimeAvatarManager avatarManager, RealtimeAvatar avatar, bool isLocalAvatar)
     {
 
-        if (realtime.clientID > avatars.Length-1) return;
+        //if (realtime.clientID > avatars.Length-1) return;
 
         //Assign a custom prefab
-        avatarManager.localAvatarPrefab = avatars[realtime.clientID].avatarPrefab;
+        //avatarManager.localAvatarPrefab = avatarTypes[realtime.clientID].avatarPrefab;
 
         //Assign a spawnPoint
-        xrRig.transform.position= avatars[realtime.clientID].spawnPoint.position;
+        xrRig.transform.position= avatarTypes[realtime.clientID].spawnPoint.position;
 
         //Assign character skills
-        RigSetup(avatars[realtime.clientID].avatarType);
+        RigSetup(avatarTypes[realtime.clientID].avatarType);
 
     }
 
@@ -73,9 +74,9 @@ public class MyAvatarManager : MonoBehaviour
                 xrRig.GetComponent<Climber>().enabled= true;
                 xrRig.GetComponent<LocomotionSystemsManager>().enabled = true;
 
-                locomotionProvider.GetComponent<ActionBasedSnapTurnProvider>().enabled = true;
-                locomotionProvider.GetComponent<ActionBasedContinuousMoveProvider>().enabled = true;
-                locomotionProvider.GetComponent<MyCharacterControllerDriver>().enabled = true;
+                locomotionSystemProvider.GetComponent<ActionBasedSnapTurnProvider>().enabled = true;
+                locomotionSystemProvider.GetComponent<ActionBasedContinuousMoveProvider>().enabled = true;
+                locomotionSystemProvider.GetComponent<MyCharacterControllerDriver>().enabled = true;
 
                 xrRig.GetComponent<Swim>().enabled = false;
                 xrRig.GetComponent<CapsuleCollider>().enabled = false;
@@ -90,9 +91,9 @@ public class MyAvatarManager : MonoBehaviour
                 xrRig.GetComponent<Climber>().enabled = false;
                 xrRig.GetComponent<LocomotionSystemsManager>().enabled = false;
 
-                locomotionProvider.GetComponent<ActionBasedSnapTurnProvider>().enabled = false;
-                locomotionProvider.GetComponent<ActionBasedContinuousMoveProvider>().enabled = false;
-                locomotionProvider.GetComponent<MyCharacterControllerDriver>().enabled = false;
+                locomotionSystemProvider.GetComponent<ActionBasedSnapTurnProvider>().enabled = false;
+                locomotionSystemProvider.GetComponent<ActionBasedContinuousMoveProvider>().enabled = false;
+                locomotionSystemProvider.GetComponent<MyCharacterControllerDriver>().enabled = false;
 
                 xrRig.GetComponent<Swim>().enabled = false;
                 xrRig.GetComponent<CapsuleCollider>().enabled = false;
@@ -107,9 +108,9 @@ public class MyAvatarManager : MonoBehaviour
                 xrRig.GetComponent<Climber>().enabled = false;
                 xrRig.GetComponent<LocomotionSystemsManager>().enabled = false;
 
-                locomotionProvider.GetComponent<ActionBasedSnapTurnProvider>().enabled = true;
-                locomotionProvider.GetComponent<ActionBasedContinuousMoveProvider>().enabled = false;
-                locomotionProvider.GetComponent<MyCharacterControllerDriver>().enabled =false;
+                locomotionSystemProvider.GetComponent<ActionBasedSnapTurnProvider>().enabled = true;
+                locomotionSystemProvider.GetComponent<ActionBasedContinuousMoveProvider>().enabled = false;
+                locomotionSystemProvider.GetComponent<MyCharacterControllerDriver>().enabled =false;
 
                 xrRig.GetComponent<Swim>().enabled = false;
                 xrRig.GetComponent<CapsuleCollider>().enabled = false;
