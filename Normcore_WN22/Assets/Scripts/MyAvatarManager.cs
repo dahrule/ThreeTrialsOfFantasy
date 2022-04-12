@@ -3,6 +3,9 @@ using Normal.Realtime;
 using UnityEngine.XR.Interaction.Toolkit;
 using System;
 
+/// <summary>
+/// Manages the starting position, the local avatar prefab, and the scripts on the local XRrig that provide characters different movement skills.
+/// </summary>
 public enum Type { Amphibian, Sprit, Giant };
 
 [Serializable]
@@ -40,17 +43,13 @@ public class MyAvatarManager : MonoBehaviour
        
     }
 
-    void OnEnable()
-    {
-       
-    }
     #endregion
 
     #region Custom Functions
     private void AvatarCreated(RealtimeAvatarManagerFork avatarManager, RealtimeAvatarFork avatar, bool isLocalAvatar)
     {
 
-        //if (realtime.clientID > avatars.Length-1) return;
+        if (realtime.clientID > avatarTypes.Length-1) return;
 
         //Assign a custom prefab
         if(isLocalAvatar) rtAvatarManager.localAvatarPrefab = avatarTypes[realtime.clientID].avatarPrefab;
@@ -104,18 +103,22 @@ public class MyAvatarManager : MonoBehaviour
                 break;
 
             case Type.Giant:
-                xrRig.GetComponent<Rigidbody>().isKinematic = true;
-                xrRig.GetComponent<CharacterController>().enabled = false;
+                xrRig.GetComponent<Rigidbody>().isKinematic = false;
+                xrRig.GetComponent<CharacterController>().enabled = true;
                 xrRig.GetComponent<Climber>().enabled = false;
-                xrRig.GetComponent<LocomotionSystemsManager>().enabled = false;
+                xrRig.GetComponent<LocomotionSystemsManager>().enabled = true;
+
+                xrRig.transform.localScale=new Vector3(3f,3f,3f);
 
                 locomotionSystemProvider.GetComponent<ActionBasedSnapTurnProvider>().enabled = true;
-                locomotionSystemProvider.GetComponent<ActionBasedContinuousMoveProvider>().enabled = false;
-                locomotionSystemProvider.GetComponent<MyCharacterControllerDriver>().enabled =false;
+                locomotionSystemProvider.GetComponent<ActionBasedContinuousMoveProvider>().enabled = true;
+                locomotionSystemProvider.GetComponent<MyCharacterControllerDriver>().enabled = true;
 
                 xrRig.GetComponent<Swim>().enabled = false;
                 xrRig.GetComponent<CapsuleCollider>().enabled = false;
                 xrRig.GetComponent<JumpTester>().enabled = false;
+
+                neckReference.SetActive(false);
                 break;
         }
     }

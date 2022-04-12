@@ -11,10 +11,10 @@ using UnityEngine.InputSystem;
 public class Swim : MonoBehaviour
 {
     [Header ("Swim physics parameters")]
-    [SerializeField] float swimForce=2f;
+    [SerializeField] float swimForce=3f;
     [SerializeField] float dragForce = 1f;
-    [SerializeField] float minForce = 1f; //minimum stroke force required to move.
-    [SerializeField] float minTimeBetweenStrokes=0.2f; //minimum time required between strokes to validate movement.
+    [SerializeField] float minForce = 3f; //minimum stroke force required to move.
+    [SerializeField] float minTimeBetweenStrokes=0f; //minimum time required between strokes to validate movement.
 
     [Header("Swim Input controllers")]
     [SerializeField] InputActionReference rightControllerVelocity;
