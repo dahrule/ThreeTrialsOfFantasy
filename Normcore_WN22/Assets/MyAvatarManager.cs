@@ -24,7 +24,7 @@ public class MyAvatarManager : MonoBehaviour
     [SerializeField] AvatarType[] avatarTypes;
 
 
-    private RealtimeAvatarManager rtAvatarManager;
+    private RealtimeAvatarManagerFork rtAvatarManager;
     private Realtime realtime;
 
 
@@ -32,28 +32,29 @@ public class MyAvatarManager : MonoBehaviour
     private void Awake()
     {
         //Get references to components
-        rtAvatarManager = GetComponent<RealtimeAvatarManager>();
+        rtAvatarManager = GetComponent<RealtimeAvatarManagerFork>();
         realtime = GetComponent<Realtime>();
 
         //subscribe to events
         rtAvatarManager.avatarCreated += AvatarCreated;
+       
     }
 
     void OnEnable()
     {
-        //subscribe to events
-        //rtAvatarManager.avatarCreated += AvatarCreated;
+       
     }
     #endregion
 
     #region Custom Functions
-    private void AvatarCreated(RealtimeAvatarManager avatarManager, RealtimeAvatar avatar, bool isLocalAvatar)
+    private void AvatarCreated(RealtimeAvatarManagerFork avatarManager, RealtimeAvatarFork avatar, bool isLocalAvatar)
     {
 
         //if (realtime.clientID > avatars.Length-1) return;
 
         //Assign a custom prefab
-        //avatarManager.localAvatarPrefab = avatarTypes[realtime.clientID].avatarPrefab;
+        if(isLocalAvatar) rtAvatarManager.localAvatarPrefab = avatarTypes[realtime.clientID].avatarPrefab;
+       
 
         //Assign a spawnPoint
         xrRig.transform.position= avatarTypes[realtime.clientID].spawnPoint.position;

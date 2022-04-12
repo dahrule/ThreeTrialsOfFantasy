@@ -25,7 +25,7 @@ namespace Normal.Realtime
         public event AvatarCreatedDestroyed avatarCreated;
         public event AvatarCreatedDestroyed avatarDestroyed;
 
-       public Realtime _realtime;
+        private Realtime _realtime;
 
         void Awake()
         {
@@ -61,7 +61,7 @@ namespace Normal.Realtime
         {
             if (!gameObject.activeInHierarchy || !enabled)
                 return;
-            switch (_realtime.clientID)
+           /* switch (_realtime.clientID)
             {
                 case 0:
                     _localAvatarPrefab = _avatarPrefabArray[0];
@@ -69,7 +69,7 @@ namespace Normal.Realtime
                 case 1:
                     _localAvatarPrefab = _avatarPrefabArray[1];
                     break;
-            }
+            }*/
             // Create avatar
             CreateAvatarIfNeeded();
         }
@@ -147,6 +147,7 @@ namespace Normal.Realtime
             if (localAvatar != null)
             {
                 DestroyAvatarIfNeeded();
+                avatars.Remove(_realtime.clientID);
                 CreateAvatarIfNeeded();
             }
         }
