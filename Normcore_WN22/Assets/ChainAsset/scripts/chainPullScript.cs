@@ -21,6 +21,8 @@ public class chainPullScript: RealtimeComponent<DoorAnimModel>
     [SerializeField]
     Animator wall;
 
+    [SerializeField] AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +35,7 @@ public class chainPullScript: RealtimeComponent<DoorAnimModel>
     {
         if (!_isPressed && GetValue() + threshold >= 1) Pressed();
         if (_isPressed && GetValue() - threshold <= 0) Released();
-         Debug.Log(GetValue());
+         //Debug.Log(GetValue());
         //Debug.Log(transform.localPosition);
     }
 
@@ -57,6 +59,7 @@ public class chainPullScript: RealtimeComponent<DoorAnimModel>
     private void doorChange(DoorAnimModel model, int value)
     {
        wall.SetInteger("DoorInt", value);
+       audioSource.Play();
 
     }
 
