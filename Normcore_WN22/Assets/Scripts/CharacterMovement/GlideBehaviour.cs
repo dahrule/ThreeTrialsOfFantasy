@@ -18,23 +18,26 @@ public class GlideBehaviour : MonoBehaviour
 
     [Header("Locomotion parameters")]
     [SerializeField] float jumpForce=500f;
-    [SerializeField] float airDrag=5f;
+    [Tooltip("defines the falling speed")] [SerializeField] float airDrag=5f;
     [SerializeField] float glidingSpeed = 4f;
     
 
     private Rigidbody rgbody;
+    private XRRig rig;
+    private CapsuleCollider capcollider;
     private float walkingspeed;
+    
 
-  
-
+ 
     bool IsGrounded => Physics.Raycast(new Vector3 (transform.position.x,transform.position.y, transform.position.z),Vector3.down,2.0f);
     bool armsExtended => Vector3.Dot(RightController.transform.forward, LeftController.transform.forward) < -0.6;
-
 
 
     private void Awake()
     {
         rgbody = GetComponent<Rigidbody>();
+        rig = GetComponent<XRRig>();
+        capcollider = GetComponent<CapsuleCollider>();
 
         JumpActionActionReference.action.performed += Jump;
 
@@ -47,12 +50,14 @@ public class GlideBehaviour : MonoBehaviour
         rgbody.constraints = RigidbodyConstraints.FreezeRotation;
         rgbody.useGravity = true;
     }
+    private void Update()
+    {
+        UpdateColliderPosition();
+
+    }
 
     private void FixedUpdate()
     {
-        Debug.Log(IsGrounded);
-
-
         if (!IsGrounded && armsExtended)
         {
             Glide();
@@ -62,6 +67,13 @@ public class GlideBehaviour : MonoBehaviour
             rgbody.drag = 0;
             MoveProvider.moveSpeed = walkingspeed;
         }
+    }
+
+    private void UpdateColliderPosition()
+    {
+        var center = rig.cameraInRigSpacePos;
+        capcollider.center = new Vector3(center.x, capcollider.center.y, center.z);
+        capcollider.height = rig.cameraInRigSpaceHeight;
     }
 
     private void Jump(InputAction.CallbackContext obj)
@@ -77,8 +89,4 @@ public class GlideBehaviour : MonoBehaviour
         MoveProvider.moveSpeed = glidingSpeed; // avatar moves faster using the joystick while gliding.
     }
 
-    void Test()
-    {
-        
-    }
 }
