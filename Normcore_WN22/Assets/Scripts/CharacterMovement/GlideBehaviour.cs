@@ -79,8 +79,6 @@ public class GlideBehaviour : MonoBehaviour
 
     void Test()
     {
-        float aValue;
-        float normal = Mathf.InverseLerp(aLow, aHigh, value);
-        float bValue = Mathf.Lerp(bLow, bHigh, normal);
+        
     }
 }
