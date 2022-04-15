@@ -27,7 +27,6 @@ public class GlideBehaviour : MonoBehaviour
     private CapsuleCollider capcollider;
     private float walkingspeed;
     
-
  
     bool IsGrounded => Physics.Raycast(new Vector3 (transform.position.x,transform.position.y, transform.position.z),Vector3.down,2.0f);
     bool armsExtended => Vector3.Dot(RightController.transform.forward, LeftController.transform.forward) < -0.6;
