@@ -1934,8 +1934,9 @@ MonoBehaviour:
   rightControllerVelocity: {fileID: -3056783339765901586, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   leftControllerVelocity: {fileID: -7468325728582583635, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   trackingReference: {fileID: 0}
-  trackRefoffset: 0
+  neckReference: {fileID: 0}
   waterSurface: {fileID: 0}
+  XRcamera: {fileID: 0}
 --- !u!1 &1068110175845223622
 GameObject:
   m_ObjectHideFlags: 0

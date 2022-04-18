@@ -19,7 +19,7 @@ public class SurfaceChecker : MonoBehaviour
         { 
            OnNeckEntersWater?.Invoke(LocomotionState.Swim); 
         }
-        Debug.Log("EnterWater");
+        //Debug.Log("EnterWater");
     }
 
     private void OnTriggerExit(Collider other)
@@ -27,7 +27,7 @@ public class SurfaceChecker : MonoBehaviour
         if (other.CompareTag(tagForWater))
         {
             OnNeckExitsWater?.Invoke(LocomotionState.Walk);
-            Debug.Log("ExitWater");
+            //Debug.Log("ExitWater");
         }
     }
 }

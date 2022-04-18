@@ -80,13 +80,13 @@ public class MyAvatarManager : MonoBehaviour
 
                 xrRig.GetComponent<Swim>().enabled = false;
                 xrRig.GetComponent<CapsuleCollider>().enabled = false;
-                xrRig.GetComponent<JumpTester>().enabled = false;
+                xrRig.GetComponent<GlideBehaviour>().enabled = false;
 
                 neckReference.SetActive(true);
                 break;
 
             case Type.Sprit:
-                xrRig.GetComponent<Rigidbody>().isKinematic = true;
+                /*xrRig.GetComponent<Rigidbody>().isKinematic = true;
                 xrRig.GetComponent<CharacterController>().enabled =true;
                 xrRig.GetComponent<Climber>().enabled = false;
                 xrRig.GetComponent<LocomotionSystemsManager>().enabled = false;
@@ -98,6 +98,20 @@ public class MyAvatarManager : MonoBehaviour
                 xrRig.GetComponent<Swim>().enabled = false;
                 xrRig.GetComponent<CapsuleCollider>().enabled = false;
                 xrRig.GetComponent<JumpTester>().enabled = true;
+
+                neckReference.SetActive(false);*/
+
+                xrRig.GetComponent<CharacterController>().enabled = false;
+                xrRig.GetComponent<Climber>().enabled = false;
+                xrRig.GetComponent<LocomotionSystemsManager>().enabled = false;
+
+                locomotionSystemProvider.GetComponent<ActionBasedSnapTurnProvider>().enabled = true;
+                locomotionSystemProvider.GetComponent<ActionBasedContinuousMoveProvider>().enabled = true;
+                locomotionSystemProvider.GetComponent<MyCharacterControllerDriver>().enabled = false;
+
+                xrRig.GetComponent<Swim>().enabled = false;
+                xrRig.GetComponent<CapsuleCollider>().enabled = true;
+                xrRig.GetComponent<GlideBehaviour>().enabled = true;
 
                 neckReference.SetActive(false);
                 break;
@@ -116,7 +130,7 @@ public class MyAvatarManager : MonoBehaviour
 
                 xrRig.GetComponent<Swim>().enabled = false;
                 xrRig.GetComponent<CapsuleCollider>().enabled = false;
-                xrRig.GetComponent<JumpTester>().enabled = false;
+                xrRig.GetComponent<GlideBehaviour>().enabled = false;
 
                 neckReference.SetActive(false);
                 break;

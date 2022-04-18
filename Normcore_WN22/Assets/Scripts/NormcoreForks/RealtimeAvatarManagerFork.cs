@@ -13,7 +13,7 @@ namespace Normal.Realtime
         [FormerlySerializedAs("_avatarPrefab")]
         [SerializeField] private GameObject _localAvatarPrefab;
         [SerializeField] private RealtimeAvatarFork.LocalPlayer _localPlayer;
-        [SerializeField] private GameObject[] _avatarPrefabArray;
+        //[SerializeField] private GameObject[] _avatarPrefabArray;
 #pragma warning restore 0649
 
         public GameObject localAvatarPrefab { get { return _localAvatarPrefab; } set { SetLocalAvatarPrefab(value); } }

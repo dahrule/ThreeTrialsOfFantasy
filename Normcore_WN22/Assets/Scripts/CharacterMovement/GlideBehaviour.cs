@@ -20,11 +20,17 @@ public class GlideBehaviour : MonoBehaviour
     [SerializeField] float jumpForce=500f;
     [Tooltip("defines the falling speed")] [SerializeField] float airDrag=5f;
     [SerializeField] float glidingSpeed = 4f;
-    
+
+    [Header("Sound sfx")]
+    [SerializeField] AudioClip jumpfx;
+    [SerializeField] AudioClip landsfx;
+    [SerializeField] AudioClip glidesfx;
+
 
     private Rigidbody rgbody;
     private XRRig rig;
     private CapsuleCollider capcollider;
+    private AudioSource audioSource;
     private float walkingspeed;
     
  
@@ -37,18 +43,18 @@ public class GlideBehaviour : MonoBehaviour
         rgbody = GetComponent<Rigidbody>();
         rig = GetComponent<XRRig>();
         capcollider = GetComponent<CapsuleCollider>();
+        audioSource = GetComponent<AudioSource>();
 
         JumpActionActionReference.action.performed += Jump;
 
         walkingspeed = MoveProvider.moveSpeed; //save original move speed from the Continous Movement Provider component.
     }
 
-    private void OnEnable() 
+    private void OnEnable()
     {
-        //Set rigid body's  and collider's states.
-        rgbody.constraints = RigidbodyConstraints.FreezeRotation;
-        rgbody.useGravity = true;
+        SetUpRigidbody();
     }
+
     private void Update()
     {
         UpdateColliderPosition();
@@ -63,9 +69,30 @@ public class GlideBehaviour : MonoBehaviour
         }
         else
         {
+            //Falling or landed
             rgbody.drag = 0;
             MoveProvider.moveSpeed = walkingspeed;
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Ground") && IsGrounded)
+        {
+            audioSource.PlayOneShot(landsfx);
+
+            Debug.Log(rgbody.velocity.y);
+            
+        }
+   
+    }
+
+    private void SetUpRigidbody()
+    {
+        //Set rigid body's  and collider's states.
+        rgbody.constraints = RigidbodyConstraints.FreezeRotation;
+        rgbody.useGravity = true;
+        rgbody.isKinematic = false;
     }
 
     private void UpdateColliderPosition()
@@ -79,11 +106,14 @@ public class GlideBehaviour : MonoBehaviour
     {
         if (!IsGrounded) return;
 
+        audioSource.PlayOneShot(jumpfx);
         rgbody.AddForce(Vector3.up * jumpForce);
     }
 
     private void Glide()
     {
+        if(!audioSource.isPlaying) audioSource.PlayOneShot(glidesfx);
+
         rgbody.drag = airDrag; //avatar fallsdown slower when gliding.
         MoveProvider.moveSpeed = glidingSpeed; // avatar moves faster using the joystick while gliding.
     }
