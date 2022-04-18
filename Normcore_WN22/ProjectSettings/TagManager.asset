@@ -8,6 +8,7 @@ TagManager:
   - FingerTip_index
   - FingerTip_pinky
   - Ground
+  - chain
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Avatar
   - PostProcessing
   - Player
-  - 
+  - Rock
   - 
   - 
   - 
