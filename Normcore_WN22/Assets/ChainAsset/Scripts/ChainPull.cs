@@ -26,7 +26,7 @@ public class ChainPull: MonoBehaviour
     {
         if (!_isPressed && GetValue() + threshold >= 1) Pressed();
         if (_isPressed && GetValue() - threshold <= 0) Released();
-        Debug.Log(GetValue());
+        //Debug.Log(GetValue());
         //Debug.Log(transform.localPosition);
     }
 

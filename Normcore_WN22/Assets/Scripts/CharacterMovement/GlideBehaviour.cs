@@ -22,9 +22,10 @@ public class GlideBehaviour : MonoBehaviour
     [SerializeField] float glidingSpeed = 4f;
 
     [Header("Sound sfx")]
-    [SerializeField] AudioClip jumpfx;
+    [SerializeField] AudioClip jumpsfx;
     [SerializeField] AudioClip landsfx;
     [SerializeField] AudioClip glidesfx;
+    [SerializeField] AudioClip fallingsfx;
 
 
     private Rigidbody rgbody;
@@ -32,11 +33,13 @@ public class GlideBehaviour : MonoBehaviour
     private CapsuleCollider capcollider;
     private AudioSource audioSource;
     private float walkingspeed;
-    
- 
-    bool IsGrounded => Physics.Raycast(new Vector3 (transform.position.x,transform.position.y, transform.position.z),Vector3.down,2.0f);
-    bool armsExtended => Vector3.Dot(RightController.transform.forward, LeftController.transform.forward) < -0.6;
 
+    private float fallingTreshold = 2f;
+
+
+    bool IsGrounded => Physics.Raycast(new Vector3 (transform.position.x,transform.position.y, transform.position.z),Vector3.down,2.0f);
+    bool ArmsExtended => Vector3.Dot(RightController.transform.forward, LeftController.transform.forward) < -0.6;
+    bool FreeFalling => rgbody.velocity.y > fallingTreshold;
 
     private void Awake()
     {
@@ -63,13 +66,17 @@ public class GlideBehaviour : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!IsGrounded && armsExtended)
+        if (!IsGrounded && ArmsExtended) //gliding state
         {
             Glide();
+            audioSource.clip = glidesfx;
+            if (!audioSource.isPlaying) audioSource.Play();
         }
-        else
+        else if (!IsGrounded && FreeFalling) //falling state
         {
-            //Falling or landed
+            audioSource.clip =fallingsfx;
+            if(!audioSource.isPlaying) audioSource.Play();
+
             rgbody.drag = 0;
             MoveProvider.moveSpeed = walkingspeed;
         }
@@ -77,12 +84,13 @@ public class GlideBehaviour : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Ground") && IsGrounded)
+        if(collision.gameObject.CompareTag("Ground") && IsGrounded ) //landing state
         {
-            audioSource.PlayOneShot(landsfx);
+            audioSource.clip = landsfx;
+            audioSource.Play();
 
-            Debug.Log(rgbody.velocity.y);
-            
+            rgbody.drag = 0;
+            MoveProvider.moveSpeed = walkingspeed;
         }
    
     }
@@ -106,16 +114,15 @@ public class GlideBehaviour : MonoBehaviour
     {
         if (!IsGrounded) return;
 
-        audioSource.PlayOneShot(jumpfx);
+        audioSource.PlayOneShot(jumpsfx);
         rgbody.AddForce(Vector3.up * jumpForce);
     }
 
     private void Glide()
     {
-        if(!audioSource.isPlaying) audioSource.PlayOneShot(glidesfx);
-
         rgbody.drag = airDrag; //avatar fallsdown slower when gliding.
         MoveProvider.moveSpeed = glidingSpeed; // avatar moves faster using the joystick while gliding.
     }
 
+   
 }
