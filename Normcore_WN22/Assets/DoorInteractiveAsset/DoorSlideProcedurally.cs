@@ -5,6 +5,8 @@ using Normal.Realtime;
 /// <summary>
 /// Controls door sliding procedurally.
 /// </summary>
+
+[RequireComponent(typeof(AudioSource))]
 public class DoorSlideProcedurally : RealtimeComponent<DoorModel>
 {
 
@@ -34,6 +36,7 @@ public class DoorSlideProcedurally : RealtimeComponent<DoorModel>
         while(Vector3.Distance(door.position,target)>0.05f)
         {
             SetIsDoorSliding(true);
+
             //slide door towards target
             door.position = Vector3.Lerp(door.position,target, slidingSpeed*Time.deltaTime);
 
@@ -59,14 +62,14 @@ public class DoorSlideProcedurally : RealtimeComponent<DoorModel>
 
         if (currentModel != null)
         {
-            // If this is a model that has no data set on it, populate it with the current mesh renderer color.
+            // If this is a model that has no data set on it, populate it with the current value of isDoorSliding variable.
             if (currentModel.isFreshModel)
                 currentModel.isDoorSliding = isDoorSliding;
 
-            // Update the mesh render to match the new model
+            // Update the local isDoorSliding variable to match the new model
             UpdateIsDoorSliding();
 
-            // Register for events so we'll know if the color changes later
+            // Register for events so we'll know when the model changes later
             currentModel.isDoorSlidingDidChange += DoorSlidingDidChange;
         }
     }

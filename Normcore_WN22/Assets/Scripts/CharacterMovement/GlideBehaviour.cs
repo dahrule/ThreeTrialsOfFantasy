@@ -48,9 +48,12 @@ public class GlideBehaviour : MonoBehaviour
         capcollider = GetComponent<CapsuleCollider>();
         audioSource = GetComponent<AudioSource>();
 
-        JumpActionActionReference.action.performed += Jump;
-
         walkingspeed = MoveProvider.moveSpeed; //save original move speed from the Continous Movement Provider component.
+    }
+
+    private void Start()
+    {
+        JumpActionActionReference.action.performed += Jump;
     }
 
     private void OnEnable()

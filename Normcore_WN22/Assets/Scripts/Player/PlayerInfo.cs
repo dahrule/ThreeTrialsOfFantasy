@@ -1,12 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Normal.Realtime;
-using System;
+using TMPro;
 
+/// <summary>
+/// Stores the player information to be synchronized
+/// </summary>
 public class PlayerInfo : RealtimeComponent<PlayerInfoModel>
 {
-    private string playerName;
+    private string _playerName;
+    [SerializeField] TextMeshProUGUI playerNameText;
+
+    private void Start()
+    {
+        // We don't need to see our own nickname
+        //playerNameText.enabled = false;
+    }
+
     protected override void OnRealtimeModelReplaced(PlayerInfoModel previousModel, PlayerInfoModel currentModel)
     {
         if (previousModel != null)
@@ -19,8 +28,7 @@ public class PlayerInfo : RealtimeComponent<PlayerInfoModel>
         {
             // If this is a model that has no data set on it, populate it with the current unity component data
             if (currentModel.isFreshModel)
-                currentModel.playerName = playerName
-                    ;
+                currentModel.playerName = _playerName;
 
             // Update the mesh render to match the new model
             UpdatePlayerName();
@@ -37,7 +45,8 @@ public class PlayerInfo : RealtimeComponent<PlayerInfoModel>
 
     private void UpdatePlayerName()
     {
-        playerName = model.playerName;
+        _playerName = model.playerName;
+        playerNameText.text = _playerName;
     }
 
     public void SetPlayerName(string name)

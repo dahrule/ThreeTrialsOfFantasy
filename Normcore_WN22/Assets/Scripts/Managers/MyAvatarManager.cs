@@ -4,9 +4,9 @@ using UnityEngine.XR.Interaction.Toolkit;
 using System;
 
 /// <summary>
-/// Manages the starting position, the local avatar prefab, and the scripts on the local XRrig that provide characters different movement skills.
+/// Assigns each player a unique avatar with different skills, names, and starting positions.
 /// </summary>
-public enum Type { Amphibian, Sprit, Giant };
+public enum Type { Amphibian, Sprite, Giant };
 
 [Serializable]
 public struct AvatarType
@@ -26,45 +26,60 @@ public class MyAvatarManager : MonoBehaviour
 
     [SerializeField] AvatarType[] avatarTypes;
 
+    private RealtimeAvatarManagerFork _rtAvatarManager;
+    private Realtime _realtime;
 
-    private RealtimeAvatarManagerFork rtAvatarManager;
-    private Realtime realtime;
+    private static string[] _adjectives = new string[] { "Magical", "Cool", "Nice", "Funny", "Fancy", "Glorious", "Weird", "Awesome" }; //adjetives for composing the player name
 
 
     #region Built-in Functions
     private void Awake()
     {
         //Get references to components
-        rtAvatarManager = GetComponent<RealtimeAvatarManagerFork>();
-        realtime = GetComponent<Realtime>();
+        _rtAvatarManager = GetComponent<RealtimeAvatarManagerFork>();
+        _realtime = GetComponent<Realtime>();
 
         //subscribe to events
-        rtAvatarManager.avatarCreated += AvatarCreated;
-       
+        _rtAvatarManager.avatarCreated += AssignAvatarName;
+        _realtime.didConnectToRoom += AssignAvatarCharacteristics;
     }
 
     #endregion
 
     #region Custom Functions
-    private void AvatarCreated(RealtimeAvatarManagerFork avatarManager, RealtimeAvatarFork avatar, bool isLocalAvatar)
+    private void AssignAvatarCharacteristics(Realtime realtime)
     {
+        if (realtime.clientID > avatarTypes.Length - 1) return;
 
-        if (realtime.clientID > avatarTypes.Length-1) return;
-
-        //Assign a custom prefab
-        if(isLocalAvatar) rtAvatarManager.localAvatarPrefab = avatarTypes[realtime.clientID].avatarPrefab;
-       
+        //Assign a custom avatar prefab
+        _rtAvatarManager.localAvatarPrefab = avatarTypes[realtime.clientID].avatarPrefab;
 
         //Assign a spawnPoint
-        xrRig.transform.position= avatarTypes[realtime.clientID].spawnPoint.position;
+        xrRig.transform.position = avatarTypes[realtime.clientID].spawnPoint.position;
 
-        //Assign character skills
-        RigSetup(avatarTypes[realtime.clientID].avatarType);
+        //Assign avatar skills through rig setup
+        AvatarRigSetup(avatarTypes[realtime.clientID].avatarType);
+    }
 
+    private void AssignAvatarName(RealtimeAvatarManagerFork avatarManager, RealtimeAvatarFork avatar, bool isLocalAvatar)
+    {
+        if (avatar.isOwnedLocallyInHierarchy)
+        {
+            if (_realtime.clientID > avatarTypes.Length - 1) return;
+
+            //Get character type
+            string characterType = avatarTypes[_realtime.clientID].avatarType.ToString();
+
+            // Generate a funny random name
+            string composedPlayername= _adjectives[UnityEngine.Random.Range(0, _adjectives.Length)] + " " + characterType;
+
+            avatar.gameObject.GetComponent<PlayerInfo>().SetPlayerName(composedPlayername);
+        }
+ 
     }
 
 
-    void RigSetup(Type avatarType)
+    void AvatarRigSetup(Type avatarType)
     {
         switch (avatarType)
         {
@@ -85,7 +100,7 @@ public class MyAvatarManager : MonoBehaviour
                 neckReference.SetActive(true);
                 break;
 
-            case Type.Sprit:
+            case Type.Sprite:
                 /*xrRig.GetComponent<Rigidbody>().isKinematic = true;
                 xrRig.GetComponent<CharacterController>().enabled =true;
                 xrRig.GetComponent<Climber>().enabled = false;

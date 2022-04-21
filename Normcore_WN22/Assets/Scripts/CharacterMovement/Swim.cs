@@ -26,10 +26,13 @@ public class Swim : MonoBehaviour
 
     [SerializeField] Transform waterSurface;
     [SerializeField] Transform XRcamera;
+    [SerializeField] string tagForWater;
+    [SerializeField] AudioClip enterWatersfx;
 
 
     Rigidbody rgbody;
     CapsuleCollider capsuleCollider;
+    AudioSource audioSource;
     float coolDownTimer;
    
 
@@ -38,6 +41,7 @@ public class Swim : MonoBehaviour
     {
         capsuleCollider = GetComponent<CapsuleCollider>();
         rgbody = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
 
         //Set rigid body's  and collider's states.
         rgbody.useGravity = false;
@@ -67,6 +71,14 @@ public class Swim : MonoBehaviour
         capsuleCollider.center = XRcamera.localPosition;
 
         ClampVerticalMovement();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(tagForWater))
+        {
+            audioSource.PlayOneShot(enterWatersfx);
+        }
     }
 
     private void ClampVerticalMovement()
