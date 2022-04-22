@@ -15,11 +15,15 @@ public class SurfaceChecker : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+
         if (other.CompareTag(tagForWater))
-        { 
-           OnNeckEntersWater?.Invoke(LocomotionState.Swim); 
+        {
+            OnNeckEntersWater?.Invoke(LocomotionState.Swim);
+           
         }
-        //Debug.Log("EnterWater");
+
+
+        //Debug.Log("EnteredWater");
     }
 
     private void OnTriggerExit(Collider other)
@@ -27,7 +31,7 @@ public class SurfaceChecker : MonoBehaviour
         if (other.CompareTag(tagForWater))
         {
             OnNeckExitsWater?.Invoke(LocomotionState.Walk);
-            //Debug.Log("ExitWater");
+            //Debug.Log("ExitedWater");
         }
     }
 }

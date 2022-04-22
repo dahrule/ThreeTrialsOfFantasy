@@ -24,7 +24,7 @@ public class Swim : MonoBehaviour
     [SerializeField] Transform trackingReference;
     [SerializeField] Transform neckReference;
 
-    [SerializeField] Transform waterSurface;
+    public Transform waterSurface;
     [SerializeField] Transform XRcamera;
     [SerializeField] string tagForWater;
     [SerializeField] AudioClip enterWatersfx;

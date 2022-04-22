@@ -16,12 +16,22 @@ public class GiantSoundSync : RealtimeComponent<AvatarsSoundsModel>
     private void Start()
     {
         MoveActionButton.action.performed += PlayGiantMoveSound;
+        MoveActionButton.action.canceled += StopGiantMoveSound;
     }
 
     private void PlayGiantMoveSound(InputAction.CallbackContext obj)
     {
-        Debug.Log(obj.ReadValue<Vector3>());
-        //model.playGiantMove = true;
+        
+        model.playGiantMove = true;
+        /*if (!audiosource.isPlaying) audiosource.Play();
+        Debug.Log("nO");*/
+
+    }
+
+    private void StopGiantMoveSound(InputAction.CallbackContext obj)
+    {
+        
+        model.playGiantMove = false;
 
         /*if (!audiosource.isPlaying) audiosource.Play();
         Debug.Log("nO");*/
@@ -46,10 +56,13 @@ public class GiantSoundSync : RealtimeComponent<AvatarsSoundsModel>
 
     private void PlaySoundDidChange(AvatarsSoundsModel model, bool value)
     {
-        if (!audiosource.isPlaying)
+        if (value)
         {
             audiosource.Play();
-            Invoke("ResetBool", audiosource.clip.length);
+            //Invoke("ResetBool", audiosource.clip.length);
+        } else
+        {
+            audiosource.Stop();
         }
         Debug.Log("modled change");
     }
