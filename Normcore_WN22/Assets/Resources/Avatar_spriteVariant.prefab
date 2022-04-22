@@ -323,6 +323,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114879240156072798, guid: 877355e3e71770846bebe9cf746992e7, type: 3}
+      propertyPath: _components.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114879240156072798, guid: 877355e3e71770846bebe9cf746992e7, type: 3}
       propertyPath: _childViews.Array.data[3].view
       value: 
       objectReference: {fileID: 0}
@@ -345,6 +349,34 @@ PrefabInstance:
     - target: {fileID: 114879240156072798, guid: 877355e3e71770846bebe9cf746992e7, type: 3}
       propertyPath: _childViews.Array.data[5].viewID
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114879240156072798, guid: 877355e3e71770846bebe9cf746992e7, type: 3}
+      propertyPath: _components.Array.data[3].component
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114879240156072798, guid: 877355e3e71770846bebe9cf746992e7, type: 3}
+      propertyPath: _components.Array.data[4].component
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114879240156072798, guid: 877355e3e71770846bebe9cf746992e7, type: 3}
+      propertyPath: _components.Array.data[3].componentID
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114879240156072798, guid: 877355e3e71770846bebe9cf746992e7, type: 3}
+      propertyPath: _components.Array.data[4].componentID
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 798995947570660028, guid: 877355e3e71770846bebe9cf746992e7, type: 3}
+      propertyPath: MinDistance
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 798995947570660028, guid: 877355e3e71770846bebe9cf746992e7, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: f354997bba9263742a5a47b1ea6c6ce1, type: 3}
+    - target: {fileID: 5270591184528260934, guid: 877355e3e71770846bebe9cf746992e7, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114547564779284118, guid: 877355e3e71770846bebe9cf746992e7, type: 3}

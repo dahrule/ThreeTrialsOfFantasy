@@ -15,7 +15,7 @@ public class DoorSlideProcedurally : RealtimeComponent<DoorModel>
 
     private IEnumerator doorMovement;
     private AudioSource audioSource;
-    private bool isDoorSliding;
+    private bool _isDoorSliding;
 
     private void Awake()
     {
@@ -41,14 +41,14 @@ public class DoorSlideProcedurally : RealtimeComponent<DoorModel>
             door.position = Vector3.Lerp(door.position,target, slidingSpeed*Time.deltaTime);
 
             //Play soundsfx as long as door hasnot reached the target.
-            if (isDoorSliding && !audioSource.isPlaying) audioSource.Play(); 
+            if (_isDoorSliding && !audioSource.isPlaying) audioSource.Play(); 
 
             yield return null;
         }
 
         //Stop playing soundsfx when door reaches the target.
         SetIsDoorSliding(false);
-        if(!isDoorSliding) audioSource.Stop(); 
+        if(!_isDoorSliding) audioSource.Stop(); 
            
     }
 
@@ -64,7 +64,7 @@ public class DoorSlideProcedurally : RealtimeComponent<DoorModel>
         {
             // If this is a model that has no data set on it, populate it with the current value of isDoorSliding variable.
             if (currentModel.isFreshModel)
-                currentModel.isDoorSliding = isDoorSliding;
+                currentModel.isDoorSliding = _isDoorSliding;
 
             // Update the local isDoorSliding variable to match the new model
             UpdateIsDoorSliding();
@@ -83,7 +83,7 @@ public class DoorSlideProcedurally : RealtimeComponent<DoorModel>
 
     private void UpdateIsDoorSliding()
     {
-        isDoorSliding = model.isDoorSliding;
+        _isDoorSliding = model.isDoorSliding;
     }
 
     public void SetIsDoorSliding(bool value)
