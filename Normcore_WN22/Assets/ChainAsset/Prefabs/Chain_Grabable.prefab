@@ -127,7 +127,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0.05}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.0015174528, y: 0.0032170338, z: -0.03449982}
+  m_ConnectedAnchor: {x: 0.0015174468, y: 0.0032170338, z: -0.03449982}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -278,7 +278,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0.05}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.0032034894, y: 0.0015807322, z: -0.034879666}
+  m_ConnectedAnchor: {x: -0.0032034894, y: 0.0015806842, z: -0.034879666}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -332,7 +332,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 21054980657090035}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.00999999, y: 5.41, z: -21.45}
   m_LocalScale: {x: 0.1, y: 1, z: 0.13}
   m_Children:
@@ -382,7 +382,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 1, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.00999999, y: 6.41, z: -21.45}
+  m_ConnectedAnchor: {x: 3.06, y: 6.41, z: -21.87}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0
@@ -642,10 +642,46 @@ MonoBehaviour:
   deadZone: 0.025
   onPressed:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: DoorSlideProcedurally, Assembly-CSharp
+        m_MethodName: SetTarget
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: DoorSlideProcedurally, Assembly-CSharp
+        m_MethodName: SetTarget
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   onReleased:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: DoorSlideProcedurally, Assembly-CSharp
+        m_MethodName: SetTarget
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &21054980683755686
 GameObject:
   m_ObjectHideFlags: 0
@@ -773,7 +809,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0.05}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.0032030393, y: 0.0015807321, z: -0.03487963}
+  m_ConnectedAnchor: {x: -0.0032030393, y: 0.0015807808, z: -0.03487963}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -924,7 +960,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0.05}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.0012174535, y: 0.003017447, z: -0.03469996}
+  m_ConnectedAnchor: {x: 0.0012174998, y: 0.003017447, z: -0.03469996}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -1075,7 +1111,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0.05}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.003203068, y: 0.0015807322, z: -0.034879796}
+  m_ConnectedAnchor: {x: -0.003203068, y: 0.0015807025, z: -0.034879796}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -1340,7 +1376,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0.05}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.0015622741, y: 0.0031741848, z: -0.03333551}
+  m_ConnectedAnchor: {x: 0.0015622968, y: 0.0031741848, z: -0.03333551}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -1490,7 +1526,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0.05}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.0032030805, y: 0.0015807321, z: -0.034879852}
+  m_ConnectedAnchor: {x: -0.0032030805, y: 0.0015807556, z: -0.034879852}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -1641,7 +1677,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0.05}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.00019999983, y: 5.1053334e-10, z: -0.03279993}
+  m_ConnectedAnchor: {x: 0.00019997194, y: 5.1053334e-10, z: -0.03279993}
   m_UseSpring: 0
   m_Spring:
     spring: 0

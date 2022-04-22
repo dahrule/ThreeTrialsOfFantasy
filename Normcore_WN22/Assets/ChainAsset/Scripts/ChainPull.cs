@@ -47,7 +47,7 @@ public class ChainPull: MonoBehaviour
     {
         _isPressed = true;
         onPressed.Invoke();
-        //Debug.Log("Pressed");
+        Debug.Log("Pressed");
     }
 
     private void Released()
