@@ -47,7 +47,7 @@ namespace Normal.Realtime
 
         private void OnDisable()
         {
-           
+
             // Destroy avatar if needed
             DestroyAvatarIfNeeded();
         }
@@ -61,15 +61,15 @@ namespace Normal.Realtime
         {
             if (!gameObject.activeInHierarchy || !enabled)
                 return;
-           /* switch (_realtime.clientID)
-            {
-                case 0:
-                    _localAvatarPrefab = _avatarPrefabArray[0];
-                    break;
-                case 1:
-                    _localAvatarPrefab = _avatarPrefabArray[1];
-                    break;
-            }*/
+            /* switch (_realtime.clientID)
+             {
+                 case 0:
+                     _localAvatarPrefab = _avatarPrefabArray[0];
+                     break;
+                 case 1:
+                     _localAvatarPrefab = _avatarPrefabArray[1];
+                     break;
+             }*/
             // Create avatar
             CreateAvatarIfNeeded();
         }

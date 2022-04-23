@@ -137,7 +137,7 @@ public class MyAvatarManager : MonoBehaviour
                 xrRig.GetComponent<Climber>().enabled = false;
                 xrRig.GetComponent<LocomotionSystemsManager>().enabled = true;
 
-                xrRig.transform.localScale=new Vector3(3f,3f,3f);
+                xrRig.transform.localScale=new Vector3(2f,2f,2f);
 
                 locomotionSystemProvider.GetComponent<ActionBasedSnapTurnProvider>().enabled = true;
                 locomotionSystemProvider.GetComponent<ActionBasedContinuousMoveProvider>().enabled = true;
