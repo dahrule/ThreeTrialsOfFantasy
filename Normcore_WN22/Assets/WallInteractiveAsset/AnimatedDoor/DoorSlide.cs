@@ -8,6 +8,7 @@ public class DoorSlide : RealtimeComponent<DoorAnimModel>
 
     private Animator animator;
     private AudioSource audioSource;
+    [SerializeField] AudioClip congratsSFX;
 
 
     void Awake()
@@ -43,6 +44,7 @@ public class DoorSlide : RealtimeComponent<DoorAnimModel>
         
         UpdateAnimatorBool("DoorOpen");
         audioSource.Play();
+        audioSource.PlayOneShot(congratsSFX);
     }
 
     private void UpdateAnimatorBool(string parameterName)
