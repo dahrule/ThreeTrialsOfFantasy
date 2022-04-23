@@ -14,7 +14,7 @@ public struct AvatarType
     public Type avatarType;
     public GameObject avatarPrefab;
     public Transform spawnPoint;
-    //public GameObject skills;
+    //public float walkingSpeed;
 }
 
 public class MyAvatarManager : MonoBehaviour
@@ -57,6 +57,9 @@ public class MyAvatarManager : MonoBehaviour
         //Assign a spawnPoint
         xrRig.transform.position = avatarTypes[realtime.clientID].spawnPoint.position;
 
+        // Assign character walking speed
+        //locomotionSystemProvider.GetComponent<ActionBasedContinuousMoveProvider>().moveSpeed = avatarTypes[realtime.clientID].walkingSpeed;
+
         //Assign avatar skills through rig setup
         AvatarRigSetup(avatarTypes[realtime.clientID].avatarType);
     }
@@ -74,6 +77,7 @@ public class MyAvatarManager : MonoBehaviour
             string composedPlayername= _adjectives[UnityEngine.Random.Range(0, _adjectives.Length)] + " " + characterType;
 
             avatar.gameObject.GetComponent<PlayerInfo>().SetPlayerName(composedPlayername);
+            Debug.Log("Assign avatar names called");
         }
  
     }
@@ -98,23 +102,11 @@ public class MyAvatarManager : MonoBehaviour
                 xrRig.GetComponent<GlideBehaviour>().enabled = false;
 
                 neckReference.SetActive(true);
+                locomotionSystemProvider.GetComponent<ActionBasedContinuousMoveProvider>().moveSpeed = 2f;
                 break;
 
             case Type.Sprite:
-                /*xrRig.GetComponent<Rigidbody>().isKinematic = true;
-                xrRig.GetComponent<CharacterController>().enabled =true;
-                xrRig.GetComponent<Climber>().enabled = false;
-                xrRig.GetComponent<LocomotionSystemsManager>().enabled = false;
-
-                locomotionSystemProvider.GetComponent<ActionBasedSnapTurnProvider>().enabled = false;
-                locomotionSystemProvider.GetComponent<ActionBasedContinuousMoveProvider>().enabled = false;
-                locomotionSystemProvider.GetComponent<MyCharacterControllerDriver>().enabled = false;
-
-                xrRig.GetComponent<Swim>().enabled = false;
-                xrRig.GetComponent<CapsuleCollider>().enabled = false;
-                xrRig.GetComponent<JumpTester>().enabled = true;
-
-                neckReference.SetActive(false);*/
+                
 
                 xrRig.GetComponent<CharacterController>().enabled = false;
                 xrRig.GetComponent<Climber>().enabled = false;
@@ -129,6 +121,8 @@ public class MyAvatarManager : MonoBehaviour
                 xrRig.GetComponent<GlideBehaviour>().enabled = true;
 
                 neckReference.SetActive(false);
+
+                locomotionSystemProvider.GetComponent<ActionBasedContinuousMoveProvider>().moveSpeed = 2f;
                 break;
 
             case Type.Giant:
@@ -146,6 +140,8 @@ public class MyAvatarManager : MonoBehaviour
                 xrRig.GetComponent<Swim>().enabled = false;
                 xrRig.GetComponent<CapsuleCollider>().enabled = false;
                 xrRig.GetComponent<GlideBehaviour>().enabled = false;
+
+                locomotionSystemProvider.GetComponent<ActionBasedContinuousMoveProvider>().moveSpeed = 1f;
 
                 neckReference.SetActive(false);
                 break;
