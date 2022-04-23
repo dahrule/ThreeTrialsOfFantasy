@@ -155,6 +155,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7202695927976337361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7157319860220576098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08ece8d0e4364b844bab60945fb07791, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 7512122360227197116}
+  JumpActionButton: {fileID: 1824560197704711829, guid: c348712bda248c246b8c49b3db54643f, type: 3}
 --- !u!1001 &7158174640403214848
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -324,7 +338,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114879240156072798, guid: 877355e3e71770846bebe9cf746992e7, type: 3}
       propertyPath: _components.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114879240156072798, guid: 877355e3e71770846bebe9cf746992e7, type: 3}
       propertyPath: _childViews.Array.data[3].view
@@ -353,7 +367,7 @@ PrefabInstance:
     - target: {fileID: 114879240156072798, guid: 877355e3e71770846bebe9cf746992e7, type: 3}
       propertyPath: _components.Array.data[3].component
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 7202695927976337361}
     - target: {fileID: 114879240156072798, guid: 877355e3e71770846bebe9cf746992e7, type: 3}
       propertyPath: _components.Array.data[4].component
       value: 
@@ -381,6 +395,16 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 114547564779284118, guid: 877355e3e71770846bebe9cf746992e7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 877355e3e71770846bebe9cf746992e7, type: 3}
+--- !u!1 &7157319860220576098 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1435502846325602, guid: 877355e3e71770846bebe9cf746992e7, type: 3}
+  m_PrefabInstance: {fileID: 7158174640403214848}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &7512122360227197116 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 798995947570660028, guid: 877355e3e71770846bebe9cf746992e7, type: 3}
+  m_PrefabInstance: {fileID: 7158174640403214848}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7158610778299154760 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4098411418399560, guid: 877355e3e71770846bebe9cf746992e7, type: 3}

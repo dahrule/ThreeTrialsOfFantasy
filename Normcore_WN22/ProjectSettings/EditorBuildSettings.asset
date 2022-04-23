@@ -12,11 +12,14 @@ EditorBuildSettings:
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/Scenes/NomcoreStart.unity
-    guid: 370a6aff97003634b99372351a76c951
-  - enabled: 1
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
     path: Assets/Scenes/Swim.unity
     guid: 0d7b74f9e7d70f04ba2e07f944abf655
+  - enabled: 1
+    path: Assets/Scenes/Environment.unity
+    guid: 13bc3ffea7b3aa94cb5d1d9689410aaf
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 2eee99aa8175f814d841649e1d33aa73, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: e4d6c6e9a5f0bc143a12217b5eaed109, type: 2}

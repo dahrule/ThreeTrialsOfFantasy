@@ -1,19 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
-using Normal.Realtime.Serialization;
+
 using Normal.Realtime;
+using UnityEngine.InputSystem;
+
 
 [RequireComponent(typeof(AudioSource))]
 public class AvatarSoundSync : RealtimeComponent<AvatarSoundModel>
 {
     [SerializeField] AudioSource audioSource;
-    
+
+    [SerializeField] InputActionReference JumpActionButton;
+
 
     private void Awake()
     {
         
         audioSource = GetComponent<AudioSource>();
+    }
+
+    private void Start()
+    {
+        JumpActionButton.action.performed += PlayJumpSound;
+    }
+
+    private void PlayJumpSound(InputAction.CallbackContext obj)
+    {
+
+        model.playSoud = true;
+        
+
     }
 
     protected override void OnRealtimeModelReplaced(AvatarSoundModel previousModel, AvatarSoundModel currentModel)
