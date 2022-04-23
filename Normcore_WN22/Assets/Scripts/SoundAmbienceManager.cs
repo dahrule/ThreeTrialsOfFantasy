@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class SoundAmbienceManagerScript : MonoBehaviour
+public class SoundAmbienceManager : MonoBehaviour
 {
-   
     [SerializeField] string activator;
 
     [SerializeField] AudioMixerSnapshot underWater;
     [SerializeField] AudioMixerSnapshot onLand;
 
-    [SerializeField] float transitionTimeInterval = 1f;
+    [SerializeField] float transitionTimeInterval=1f;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag(activator))
+        if(other.gameObject.CompareTag(activator))
         {
             underWater.TransitionTo(transitionTimeInterval);
         }
